@@ -735,11 +735,17 @@
         // Function to load data from Google Sheets
         async function loadPoolData() {
             // Check if URL is configured
-            if (GOOGLE_SHEET_CSV_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnm1B5HjV7M_Ig3ZrhcxmnqKLmiGZX4nLn6ckBKZP-EmH3hm9-6eDL0V3vW9hvnSDTUQeZSU8Kkm71/pub?output=csv') {
+            if (!GOOGLE_SHEET_CSV_URL) {
                 console.warn('Google Sheets URL not configured. Using fallback data.');
                 useFallbackData();
                 return;
-            }
+                }
+
+           // if (GOOGLE_SHEET_CSV_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnm1B5HjV7M_Ig3ZrhcxmnqKLmiGZX4nLn6ckBKZP-EmH3hm9-6eDL0V3vW9hvnSDTUQeZSU8Kkm71/pub?output=csv') {
+              //  console.warn('Google Sheets URL not configured. Using fallback data.');
+               // useFallbackData();
+               // return;
+          //  }
 
             try {
                 const response = await fetch(GOOGLE_SHEET_CSV_URL);
@@ -820,6 +826,7 @@
                         const amount = formatNumber(parseFloat(entry.Amount || entry.amount || 0));
                         const extendedUntil = entry.ExtendedUntil || entry.extendeduntil || 'N/A';
                         const OwnerComment = entry.OwnerComment || entry.OwnerComment || 'None';
+
                         
                         return `
                             <div class="history-entry">
