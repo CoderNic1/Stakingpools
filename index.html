@@ -120,6 +120,20 @@
             word-break: break-word;
         }
 
+        .loading-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+            border-top-color: #60a5fa;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .mission-text {
             line-height: 1.8;
             color: #cbd5e1;
@@ -242,7 +256,7 @@
         }
 
         .accordion-content.active {
-            max-height: 800px;
+            max-height: 1000px;
         }
 
         .accordion-inner {
@@ -413,6 +427,15 @@
             font-size: 0.95em;
         }
 
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            color: #fca5a5;
+            margin-top: 10px;
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -446,7 +469,7 @@
         </header>
 
         <!-- POOL 1: BXW => AGAR -->
-        <div class="pool-wrapper">
+        <div class="pool-wrapper" data-pool-id="pool1">
             <div class="pool-main-header" onclick="togglePoolMain(this)">
                 <span>💎 Pool: BXW ⇒ AGAR</span>
                 <span class="pool-main-arrow">▼</span>
@@ -466,7 +489,9 @@
                         </div>
                         <div class="pool-item">
                             <div class="pool-label">Total Given Away</div>
-                            <div class="pool-value"> 0 $AGAR Tokens</div>
+                            <div class="pool-value" id="total-pool1">
+                                <span class="loading-indicator"></span>
+                            </div>
                         </div>
                         <div class="pool-item">
                             <div class="pool-label">Pool Start Date</div>
@@ -536,22 +561,8 @@
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-inner">
-                                    <div class="history-log">
-                                        <div class="history-entry">
-                                            <div class="history-date">📅 November 14, 2025</div>
-                                            <div class="history-details">
-                                                <strong>Rewards Added:</strong> 120,000 AGAR<br>
-                                                <strong>Pool Extended Until:</strong> January 14, 2026
-                                            </div>
-                                        </div>
-                                        <!-- Add more history entries below -->
-                                        <!-- <div class="history-entry">
-                                            <div class="history-date">📅 Date Here</div>
-                                            <div class="history-details">
-                                                <strong>Rewards Added:</strong> Amount Here<br>
-                                                <strong>Pool Extended Until:</strong> Date Here
-                                            </div>
-                                        </div> -->
+                                    <div class="history-log" id="history-pool1">
+                                        <span class="loading-indicator"></span>
                                     </div>
                                 </div>
                             </div>
@@ -561,8 +572,60 @@
             </div>
         </div>
 
-        <!-- DUPLICATE THIS ENTIRE POOL WRAPPER SECTION TO ADD MORE POOLS -->
-        <!-- Just copy from <div class="pool-wrapper"> to </div> and change the content -->
+        <!-- TEMPLATE FOR ADDING MORE POOLS - COPY FROM HERE -->
+        <!-- 
+        <div class="pool-wrapper" data-pool-id="pool2">
+            <div class="pool-main-header" onclick="togglePoolMain(this)">
+                <span>💎 Pool: TOKEN1 ⇒ TOKEN2</span>
+                <span class="pool-main-arrow">▼</span>
+            </div>
+            
+            <div class="pool-main-content">
+                <div class="card">
+                    <h2>📊 Pool Information</h2>
+                    <div class="pool-grid">
+                        <div class="pool-item">
+                            <div class="pool-label">Token to Stake</div>
+                            <div class="pool-value">TOKEN1</div>
+                        </div>
+                        <div class="pool-item">
+                            <div class="pool-label">Token to Earn</div>
+                            <div class="pool-value">TOKEN2</div>
+                        </div>
+                        <div class="pool-item">
+                            <div class="pool-label">Total Given Away</div>
+                            <div class="pool-value" id="total-pool2">
+                                <span class="loading-indicator"></span>
+                            </div>
+                        </div>
+                        <div class="pool-item">
+                            <div class="pool-label">Pool Start Date</div>
+                            <div class="pool-value">Date Here</div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-section">
+                        [... rest of accordion items ...]
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>📜 Pool History</span>
+                                <span class="accordion-arrow">▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-inner">
+                                    <div class="history-log" id="history-pool2">
+                                        <span class="loading-indicator"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+        <!-- END TEMPLATE -->
 
         <div class="card">
             <h2>💰 How I Fund The Pools</h2>
@@ -618,6 +681,168 @@
     </footer>
 
     <script>
+        // ====================================
+        // CONFIGURATION - EDIT THIS SECTION
+        // ====================================
+        
+        // Google Sheets Configuration
+        // To set this up:
+        // 1. Create a Google Sheet with these columns: PoolID | Date | Amount | ExtendedUntil | TokenSymbol
+        // 2. Go to File > Share > Publish to web
+        // 3. Choose "Entire Document" and "Comma-separated values (.csv)"
+        // 4. Copy the URL and paste it below
+        
+        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnm1B5HjV7M_Ig3ZrhcxmnqKLmiGZX4nLn6ckBKZP-EmH3hm9-6eDL0V3vW9hvnSDTUQeZSU8Kkm71/pub?output=csv';
+        
+        // Example sheet structure:
+        // | PoolID | Date       | Amount | ExtendedUntil | TokenSymbol |
+        // |--------|------------|--------|---------------|-------------|
+        // | pool1  | 2025-11-14 | 10000  | 2025-12-14    | AGAR        |
+        // | pool1  | 2025-11-20 | 5000   | 2025-12-20    | AGAR        |
+        // | pool2  | 2025-11-15 | 20000  | 2025-12-15    | TOKEN       |
+
+        // ====================================
+        // END CONFIGURATION
+        // ====================================
+
+        // Function to format numbers with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Function to parse CSV
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const headers = lines[0].split(',').map(h => h.trim());
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                if (lines[i].trim() === '') continue;
+                
+                const values = lines[i].split(',').map(v => v.trim());
+                const entry = {};
+                
+                headers.forEach((header, index) => {
+                    entry[header] = values[index];
+                });
+                
+                data.push(entry);
+            }
+            
+            return data;
+        }
+
+        // Function to load data from Google Sheets
+        async function loadPoolData() {
+            // Check if URL is configured
+            if (GOOGLE_SHEET_CSV_URL === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
+                console.warn('Google Sheets URL not configured. Using fallback data.');
+                useFallbackData();
+                return;
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                
+                const csvText = await response.text();
+                const data = parseCSV(csvText);
+                
+                // Group data by pool
+                const poolData = {};
+                data.forEach(entry => {
+                    const poolId = entry.PoolID || entry.poolid || entry.poolId;
+                    if (!poolData[poolId]) {
+                        poolData[poolId] = [];
+                    }
+                    poolData[poolId].push(entry);
+                });
+                
+                // Update each pool
+                Object.keys(poolData).forEach(poolId => {
+                    updatePoolDisplay(poolId, poolData[poolId]);
+                });
+                
+            } catch (error) {
+                console.error('Error loading pool data:', error);
+                showError('Unable to load pool history. Please try again later.');
+                useFallbackData();
+            }
+        }
+
+        // Function to use fallback data when Google Sheets is not configured
+        function useFallbackData() {
+            const fallbackData = {
+                pool1: [
+                    {
+                        Date: '2025-11-14',
+                        Amount: '10000',
+                        ExtendedUntil: '2025-12-14',
+                        TokenSymbol: 'TEST'
+                    }
+                ]
+            };
+            
+            Object.keys(fallbackData).forEach(poolId => {
+                updatePoolDisplay(poolId, fallbackData[poolId]);
+            });
+        }
+
+        // Function to update pool display
+        function updatePoolDisplay(poolId, entries) {
+            // Calculate total
+            let total = 0;
+            entries.forEach(entry => {
+                const amount = parseFloat(entry.Amount || entry.amount || 0);
+                total += amount;
+            });
+            
+            const tokenSymbol = entries[0]?.TokenSymbol || entries[0]?.tokensymbol || 'Tokens';
+            
+            // Update total display
+            const totalElement = document.getElementById(`total-${poolId}`);
+            if (totalElement) {
+                totalElement.innerHTML = `${formatNumber(total)} ${tokenSymbol}`;
+            }
+            
+            // Update history display
+            const historyElement = document.getElementById(`history-${poolId}`);
+            if (historyElement) {
+                if (entries.length === 0) {
+                    historyElement.innerHTML = '<p style="color: #93c5fd;">No history entries yet.</p>';
+                } else {
+                    historyElement.innerHTML = entries.map(entry => {
+                        const date = entry.Date || entry.date || 'N/A';
+                        const amount = formatNumber(parseFloat(entry.Amount || entry.amount || 0));
+                        const extendedUntil = entry.ExtendedUntil || entry.extendeduntil || 'N/A';
+                        
+                        return `
+                            <div class="history-entry">
+                                <div class="history-date">📅 ${date}</div>
+                                <div class="history-details">
+                                    <strong>Rewards Added:</strong> ${amount} ${tokenSymbol}<br>
+                                    <strong>Pool Extended Until:</strong> ${extendedUntil}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+        }
+
+        // Function to show error message
+        function showError(message) {
+            document.querySelectorAll('.history-log').forEach(log => {
+                if (log.querySelector('.loading-indicator')) {
+                    log.innerHTML = `<div class="error-message">${message}</div>`;
+                }
+            });
+        }
+
+        // Toggle functions
         function togglePoolMain(header) {
             const content = header.nextElementSibling;
             const isActive = header.classList.contains('active');
@@ -635,14 +860,12 @@
             const content = header.nextElementSibling;
             const isActive = header.classList.contains('active');
             
-            // Close all accordions in the same pool
             const allHeaders = header.closest('.pool-main-content').querySelectorAll('.accordion-header');
             const allContents = header.closest('.pool-main-content').querySelectorAll('.accordion-content');
             
             allHeaders.forEach(h => h.classList.remove('active'));
             allContents.forEach(c => c.classList.remove('active'));
             
-            // Open clicked accordion if it wasn't active
             if (!isActive) {
                 header.classList.add('active');
                 content.classList.add('active');
@@ -732,6 +955,11 @@
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Load pool data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadPoolData();
         });
     </script>
 </body>
