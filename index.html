@@ -775,6 +775,7 @@
 
         // Function to use fallback data when Google Sheets is not configured
         function useFallbackData() {
+            
             const fallbackData = {
                 pool1: [
                     {
@@ -825,8 +826,8 @@
                                 <div class="history-date">📅 ${date}</div>
                                 <div class="history-details">
                                     <strong>Rewards Added:</strong> ${amount} ${tokenSymbol}<br>
-                                    <strong>Pool Extended Until:</strong> ${extendedUntil}
-                                    <strong>Pool Comment:</strong> ${OwnerComment}
+                                    <strong>Pool Extended Until:</strong> ${extendedUntil} <br>
+                                    <strong>Comment:</strong> ${OwnerComment}
                                 </div>
                             </div>
                         `;
