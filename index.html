@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAXP Staking Pool</title>
+    <title>Staking Pools</title>
     <style>
         * {
             margin: 0;
@@ -786,9 +786,11 @@
                 pool1: [
                     {
                         Date: '2025-11-14',
-                        Amount: '10000',
+                        Amount: '0',
                         ExtendedUntil: '2025-12-14',
-                        TokenSymbol: 'TEST'
+                        TokenSymbol: 'ERROR',
+                        OwnerComment: 'An error occured, pls contact me using the button at the bottom of the website',
+                        Label:'None'
                     }
                 ]
             };
@@ -826,11 +828,12 @@
                         const amount = formatNumber(parseFloat(entry.Amount || entry.amount || 0));
                         const extendedUntil = entry.ExtendedUntil || entry.extendeduntil || 'N/A';
                         const OwnerComment = entry.OwnerComment || entry.OwnerComment || 'None';
+                        const Label = entry.Label || entry.Label || 'None';
 
                         
                         return `
                             <div class="history-entry">
-                                <div class="history-date">📅 ${date}</div>
+                                <div class="history-date">📅 ${date}<div class="funding-percentage">${Label}</div></div> 
                                 <div class="history-details">
                                     <strong>Rewards Added:</strong> ${amount} ${tokenSymbol}<br>
                                     <strong>Pool Extended Until:</strong> ${extendedUntil} <br>
