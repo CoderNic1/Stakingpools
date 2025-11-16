@@ -1026,6 +1026,12 @@
                     entry[header] = values[index];
                 });
                 
+                // Skip entries without a valid PoolID or where PoolID is the header name itself
+                const poolId = entry.PoolID || entry.poolid || entry.poolId;
+                if (!poolId || poolId === 'PoolID' || poolId === 'poolid' || poolId === 'poolId') {
+                    continue;
+                }
+                
                 data.push(entry);
             }
             
