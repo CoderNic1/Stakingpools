@@ -59,7 +59,6 @@
             opacity: 0.9;
         }
 
-        /* Quick Stats Dashboard */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -182,6 +181,7 @@
             line-height: 1.8;
             color: #cbd5e1;
             font-size: 1.1em;
+            white-space: pre-wrap;
         }
 
         .funding-section {
@@ -329,7 +329,6 @@
             max-height: 5000px;
         }
 
-        /* Enhanced Stats Section */
         .pool-stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -362,7 +361,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Progress Bar */
         .progress-container {
             margin-top: 20px;
             padding: 20px;
@@ -378,26 +376,32 @@
             font-size: 0.9em;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 25px;
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+        .countdown-timer {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 15px;
-            transition: width 1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 10px;
-            font-size: 0.85em;
+        .countdown-item {
+            text-align: center;
+            padding: 10px 15px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 10px;
+            min-width: 70px;
+        }
+
+        .countdown-value {
+            font-size: 1.8em;
             font-weight: bold;
+            color: #60a5fa;
+        }
+
+        .countdown-label {
+            font-size: 0.75em;
+            color: #93c5fd;
+            text-transform: uppercase;
         }
 
         .accordion-section {
@@ -586,35 +590,6 @@
             box-shadow: 0 8px 20px rgba(88, 101, 242, 0.4);
         }
 
-        /* Countdown Timer */
-        .countdown-timer {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .countdown-item {
-            text-align: center;
-            padding: 10px 15px;
-            background: rgba(30, 41, 59, 0.6);
-            border-radius: 10px;
-            min-width: 70px;
-        }
-
-        .countdown-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #60a5fa;
-        }
-
-        .countdown-label {
-            font-size: 0.75em;
-            color: #93c5fd;
-            text-transform: uppercase;
-        }
-
         footer {
             position: relative;
             z-index: 1;
@@ -650,16 +625,6 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .btn-website {
-            background: linear-gradient(135deg, #3b82f6, #60a5fa);
-            color: #fff;
-        }
-
-        .btn-website:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
         }
 
         .btn-discord {
@@ -746,7 +711,7 @@
     
     <div class="container">
         <header>
-            <h1>🌟 community Staking Pools</h1>
+            <h1>🌟 Community Staking Pools</h1>
             <p class="subtitle">Stake, Earn, and Grow Together</p>
         </header>
 
@@ -774,348 +739,14 @@
             </div>
         </div>
 
-        <!-- POOL 1: BXW => AGAR -->
-        <div class="pool-wrapper" data-pool-id="pool1">
-            <div class="pool-main-header" onclick="togglePoolMain(this)">
-                <div class="pool-header-left">
-                    <span>💎 Pool: BXW ⇒ AGAR</span>
-                    <span class="pool-status-badge badge-active" id="badge-pool1">Loading...</span>
-                </div>
-                <span class="pool-main-arrow">▼</span>
-                <div class="pool-status-indicator" id="status-pool1" title="Loading status...">
-                    <span class="loading-indicator" style="width: 15px; height: 15px;"></span>
-                </div>
-            </div>
-            
-            <div class="pool-main-content">
-                <div class="card">
-                    <h2>📊 Pool Information</h2>
-                    <div class="pool-grid">
-                        <div class="pool-item">
-                            <div class="pool-label">Token to Stake</div>
-                            <div class="pool-value">BXW</div>
-                        </div>
-                        <div class="pool-item">
-                            <div class="pool-label">Token to Earn</div>
-                            <div class="pool-value">AGAR</div>
-                        </div>
-                        <div class="pool-item">
-                            <div class="pool-label">Total Given Away</div>
-                            <div class="pool-value" id="total-pool1">
-                                <span class="loading-indicator"></span>
-                            </div>
-                        </div>
-                        <div class="pool-item">
-                            <div class="pool-label">Pool Start Date</div>
-                            <div class="pool-value">November 14, 2025</div>
-                        </div>
-                    </div>
-
-                    <!-- Enhanced Pool Stats -->
-                    <div class="pool-stats-grid" id="stats-pool1">
-                        <div class="pool-stat-item">
-                            <div class="pool-stat-value" id="avg-reward-pool1">-</div>
-                            <div class="pool-stat-label">Avg Reward</div>
-                        </div>
-                        <div class="pool-stat-item">
-                            <div class="pool-stat-value" id="largest-reward-pool1">-</div>
-                            <div class="pool-stat-label">Largest Reward</div>
-                        </div>
-                        <div class="pool-stat-item">
-                            <div class="pool-stat-value" id="distributions-pool1">-</div>
-                            <div class="pool-stat-label">Distributions</div>
-                        </div>
-                        <div class="pool-stat-item">
-                            <div class="pool-stat-value" id="days-active-pool1">-</div>
-                            <div class="pool-stat-label">Days Active</div>
-                        </div>
-                    </div>
-
-                    <!-- Countdown Timer -->
-                    <div class="progress-container">
-                        <div class="progress-header">
-                            <span>⏰ Time Until Pool Ends</span>
-                            <span id="end-date-pool1">Loading...</span>
-                        </div>
-                        <div class="countdown-timer" id="countdown-pool1">
-                            <div class="countdown-item">
-                                <div class="countdown-value">-</div>
-                                <div class="countdown-label">Days</div>
-                            </div>
-                            <div class="countdown-item">
-                                <div class="countdown-value">-</div>
-                                <div class="countdown-label">Hours</div>
-                            </div>
-                            <div class="countdown-item">
-                                <div class="countdown-value">-</div>
-                                <div class="countdown-label">Minutes</div>
-                            </div>
-                            <div class="countdown-item">
-                                <div class="countdown-value">-</div>
-                                <div class="countdown-label">Seconds</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-section">
-                        <div class="accordion-item">
-                            <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span>📊 About the Token You Stake</span>
-                                <span class="accordion-arrow">▼</span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <strong>Token Name:</strong> BXW<br><br>
-                                    <strong>Description:</strong>BXW is the native token of the blue collectible NFT project, the token can be used to stake to earn tokens but also can be used in there hunter game on discord. Blue collectible is building strong. With diffrent tools available to the community to use. An innovative project on the waxp chain.<br><br>
-                                    <strong>Contract Address:</strong> token.bx <br><br>
-                                    <strong>Why Stake This Token:</strong> By staking BXW, you support the project while earning rewards. It's a great way to put your tokens to work and earning those sweet rewards.
-                                    
-                                    <div class="social-links">
-                                        <div class="social-links-title">🔗 Social Links</div>
-                                        <div class="social-buttons">
-                                            <a href=" https://blueeyesdesc.com/" class="btn-small btn-website-small">
-                                                🌐 Website
-                                            </a>
-                                            <a href="https://discord.gg/EhB4mNZZUj" class="btn-small btn-discord-small">
-                                                💬 Discord
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span>🎁 About the Token You Earn</span>
-                                <span class="accordion-arrow">▼</span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <strong>Token Name:</strong> AGAR<br><br>
-                                    <strong>Description:</strong> The reward token is distributed to stakers as a thank you for participating in the pool. AGAR is a project on the waxp chain that offers diffrent utility, from fighting bosses in discord to extracting AGAR there is for every person something to do. You can stake this AGAR in the discord server or sell on the regular exchanges.<br><br>
-                                    <strong>Contract Address:</strong> token.agar<br><br>
-                                    <strong>Utility:</strong> Agar can be used to stake and earn bonus AGAR, the token is also important to upgrade and used in blends to upgrade trees,tools and gear.
-                                    
-                                    <div class="social-links">
-                                        <div class="social-links-title">🔗 Social Links</div>
-                                        <div class="social-buttons">
-                                            <a href="https://agarwoodsnft.io/home" class="btn-small btn-website-small">
-                                                🌐 Website
-                                            </a>
-                                            <a href="https://discord.gg/KdY3XgKDAn" class="btn-small btn-discord-small">
-                                                💬 Discord
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span>📜 Pool History</span>
-                                <span class="accordion-arrow">▼</span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <div class="history-filters" id="filters-pool1">
-                                        <div class="filter-group">
-                                            <label class="filter-label">Filter by Label:</label>
-                                            <select class="filter-select" onchange="filterHistory('pool1')">
-                                                <option value="all">All Labels</option>
-                                            </select>
-                                        </div>
-                                        <div class="filter-group">
-                                            <label class="filter-label">Sort by Date:</label>
-                                            <select class="filter-select" onchange="filterHistory('pool1')">
-                                                <option value="latest">Latest First</option>
-                                                <option value="oldest">Oldest First</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="history-log" id="history-pool1">
-                                        <span class="loading-indicator"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Pools will be dynamically inserted here -->
+        <div id="pools-container">
+            <div class="card" id="pools-loading" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 25px;">
+                <div class="loading-indicator" style="width: 30px; height: 30px;"></div>
+                <h2 style="color: #60a5fa; margin: 0; font-size: 1.5em;">Pools loading....</h2>
             </div>
         </div>
 
-                <!-- POOL 2: BXW => AGAR -->
-                <div class="pool-wrapper" data-pool-id="pool2">
-                    <div class="pool-main-header" onclick="togglePoolMain(this)">
-                        <div class="pool-header-left">
-                            <span>💎 Pool: TBA ⇒ TBA</span>
-                            <span class="pool-status-badge badge-active" id="badge-pool1">Loading...</span>
-                        </div>
-                        <span class="pool-main-arrow">▼</span>
-                        <div class="pool-status-indicator" id="status-pool2" title="Loading status...">
-                            <span class="loading-indicator" style="width: 15px; height: 15px;"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="pool-main-content">
-                        <div class="card">
-                            <h2>📊 Pool Information</h2>
-                            <div class="pool-grid">
-                                <div class="pool-item">
-                                    <div class="pool-label">Token to Stake</div>
-                                    <div class="pool-value">TBA</div>
-                                </div>
-                                <div class="pool-item">
-                                    <div class="pool-label">Token to Earn</div>
-                                    <div class="pool-value">TBA</div>
-                                </div>
-                                <div class="pool-item">
-                                    <div class="pool-label">Total Given Away</div>
-                                    <div class="pool-value" id="total-pool2">
-                                        <span class="loading-indicator"></span>
-                                    </div>
-                                </div>
-                                <div class="pool-item">
-                                    <div class="pool-label">Pool Start Date</div>
-                                    <div class="pool-value">TBA</div>
-                                </div>
-                            </div>
-        
-                            <!-- Enhanced Pool Stats -->
-                            <div class="pool-stats-grid" id="stats-pool2">
-                                <div class="pool-stat-item">
-                                    <div class="pool-stat-value" id="avg-reward-pool2">-</div>
-                                    <div class="pool-stat-label">Avg Reward</div>
-                                </div>
-                                <div class="pool-stat-item">
-                                    <div class="pool-stat-value" id="largest-reward-pool2">-</div>
-                                    <div class="pool-stat-label">Largest Reward</div>
-                                </div>
-                                <div class="pool-stat-item">
-                                    <div class="pool-stat-value" id="distributions-pool2">-</div>
-                                    <div class="pool-stat-label">Distributions</div>
-                                </div>
-                                <div class="pool-stat-item">
-                                    <div class="pool-stat-value" id="days-active-pool2">-</div>
-                                    <div class="pool-stat-label">Days Active</div>
-                                </div>
-                            </div>
-        
-                            <!-- Countdown Timer -->
-                            <div class="progress-container">
-                                <div class="progress-header">
-                                    <span>⏰ Time Until Pool Ends</span>
-                                    <span id="end-date-pool1">Loading...</span>
-                                </div>
-                                <div class="countdown-timer" id="countdown-pool2">
-                                    <div class="countdown-item">
-                                        <div class="countdown-value">-</div>
-                                        <div class="countdown-label">Days</div>
-                                    </div>
-                                    <div class="countdown-item">
-                                        <div class="countdown-value">-</div>
-                                        <div class="countdown-label">Hours</div>
-                                    </div>
-                                    <div class="countdown-item">
-                                        <div class="countdown-value">-</div>
-                                        <div class="countdown-label">Minutes</div>
-                                    </div>
-                                    <div class="countdown-item">
-                                        <div class="countdown-value">-</div>
-                                        <div class="countdown-label">Seconds</div>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="accordion-section">
-                                <div class="accordion-item">
-                                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                                        <span>📊 About the Token You Stake</span>
-                                        <span class="accordion-arrow">▼</span>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <div class="accordion-inner">
-                                            <strong>Token Name:</strong> TBA<br><br>
-                                            <strong>Description:</strong>Currently no 2nd pool has been created, there might be future plans for more pools.<br><br>
-                                            <strong>Contract Address:</strong> / <br><br>
-                                            <strong>Why Stake This Token:</strong>
-                                            
-                                            <div class="social-links">
-                                                <div class="social-links-title">🔗 Social Links</div>
-                                                <div class="social-buttons">
-                                                    <a href="wax.io" class="btn-small btn-website-small">
-                                                        🌐 Website
-                                                    </a>
-                                                    <a href="wax.io" class="btn-small btn-discord-small">
-                                                        💬 Discord
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="accordion-item">
-                                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                                        <span>🎁 About the Token You Earn</span>
-                                        <span class="accordion-arrow">▼</span>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <div class="accordion-inner">
-                                            <strong>Token Name:</strong> TBA<br><br>
-                                            <strong>Description:</strong> Currently no 2nd pool has been created, there might be future plans for more pools.<br><br>
-                                            <strong>Contract Address:</strong>/<br><br>
-                                            <strong>Utility:</strong> 
-                                            
-                                            <div class="social-links">
-                                                <div class="social-links-title">🔗 Social Links</div>
-                                                <div class="social-buttons">
-                                                    <a href="wax.io" class="btn-small btn-website-small">
-                                                        🌐 Website
-                                                    </a>
-                                                    <a href="wax.io" class="btn-small btn-discord-small">
-                                                        💬 Discord
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="accordion-item">
-                                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                                        <span>📜 Pool History</span>
-                                        <span class="accordion-arrow">▼</span>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <div class="accordion-inner">
-                                            <div class="history-filters" id="filters-pool2">
-                                                <div class="filter-group">
-                                                    <label class="filter-label">Filter by Label:</label>
-                                                    <select class="filter-select" onchange="filterHistory('pool2')">
-                                                        <option value="all">All Labels</option>
-                                                    </select>
-                                                </div>
-                                                <div class="filter-group">
-                                                    <label class="filter-label">Sort by Date:</label>
-                                                    <select class="filter-select" onchange="filterHistory('pool2')">
-                                                        <option value="latest">Latest First</option>
-                                                        <option value="oldest">Oldest First</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="history-log" id="history-pool2">
-                                                <span class="loading-indicator"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
         <div class="card">
             <h2>💰 How I Fund The Pools</h2>
             <div class="funding-section">
@@ -1142,13 +773,11 @@
 
         <div class="card">
             <h2>🎯 My Mission</h2>
-            <div class="mission-text">
-                I believe in the power of community, while I don't have any own project I have seen around projects that people come together to do what they love. I think we need to support each other and this is my way to help people, stake tokens and earn rewards. 
-                <br><br>
-                All the rewards will be sponsored by myself, I don't have any direct income from a collection or things I sell, while I understand people would like big rewards I can't ensure that the rewards will be consistent and it might be lower then expected.
-                <br><br>
-                My goal is simple: honest rewards funded by someone who believes that sharing with people can make a difference.
-            </div>
+            <div class="mission-text">I believe in the power of community, while I don't have any own project I have seen around projects that people come together to do what they love. I think we need to support each other and this is my way to help people, stake tokens and earn rewards. 
+
+All the rewards will be sponsored by myself, I don't have any direct income from a collection or things I sell, while I understand people would like big rewards I can't ensure that the rewards will be consistent and it might be lower then expected.
+
+My goal is simple: honest rewards funded by someone who believes that sharing with people can make a difference.</div>
         </div>
     </div>
 
@@ -1170,18 +799,21 @@
     </footer>
 
     <script>
-        const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnm1B5HjV7M_Ig3ZrhcxmnqKLmiGZX4nLn6ckBKZP-EmH3hm9-6eDL0V3vW9hvnSDTUQeZSU8Kkm71/pub?output=csv';
+        // CONFIGURATION - Update these URLs to your Google Sheets CSV exports
+        const POOL_CONFIG_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAqJxTfwNoMIpW9fM2m2dLlIKnXkriVSsrfSCxh7JY9KFjxsqL2-Oyl2pYghZWyUw5z3B0lUk0arGP/pub?output=csv';
+        const POOL_HISTORY_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnm1B5HjV7M_Ig3ZrhcxmnqKLmiGZX4nLn6ckBKZP-EmH3hm9-6eDL0V3vW9hvnSDTUQeZSU8Kkm71/pub?output=csv';
         
-        // Store pool data globally for filtering
+        // Global data storage
+        const poolConfigs = {};
         const poolHistoryData = {};
         const countdownIntervals = {};
 
-        // Function to format numbers with commas
+        // Helper function to format numbers
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // Function to parse CSV
+        // Helper function to parse CSV
         function parseCSV(csv) {
             const lines = csv.split('\n');
             const headers = lines[0].split(',').map(h => h.trim());
@@ -1197,11 +829,8 @@
                     entry[header] = values[index];
                 });
                 
-                // Skip entries without a valid PoolID or where PoolID is the header name itself
-                const poolId = entry.PoolID || entry.poolid || entry.poolId;
-                if (!poolId || poolId === 'PoolID' || poolId === 'poolid' || poolId === 'poolId') {
-                    continue;
-                }
+                // Skip invalid entries
+                if (!entry.PoolID || entry.PoolID === 'PoolID') continue;
                 
                 data.push(entry);
             }
@@ -1209,7 +838,7 @@
             return data;
         }
 
-        // Function to check if pool is active
+        // Check if pool is active
         function isPoolActive(extendedUntilDate) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -1218,7 +847,7 @@
             return extendedDate >= today;
         }
 
-        // Function to update countdown timer
+        // Update countdown timer
         function updateCountdown(poolId, endDate) {
             const countdownElement = document.getElementById(`countdown-${poolId}`);
             const endDateElement = document.getElementById(`end-date-${poolId}`);
@@ -1230,7 +859,6 @@
             
             endDateElement.textContent = endDate;
 
-            // Clear existing interval if any
             if (countdownIntervals[poolId]) {
                 clearInterval(countdownIntervals[poolId]);
             }
@@ -1278,21 +906,20 @@
             countdownIntervals[poolId] = setInterval(update, 1000);
         }
 
-        // Function to update pool status indicator
+        // Update pool status indicator
         function updatePoolStatus(poolId, entries) {
             const statusElement = document.getElementById(`status-${poolId}`);
             const badgeElement = document.getElementById(`badge-${poolId}`);
             
             if (!statusElement || entries.length === 0) return;
 
-            // Get the most recent extension date
             const latestEntry = entries.reduce((latest, entry) => {
-                const currentDate = new Date(entry.ExtendedUntil || entry.extendeduntil);
-                const latestDate = new Date(latest.ExtendedUntil || latest.extendeduntil);
+                const currentDate = new Date(entry.ExtendedUntil);
+                const latestDate = new Date(latest.ExtendedUntil);
                 return currentDate > latestDate ? entry : latest;
             });
 
-            const extendedUntil = latestEntry.ExtendedUntil || latestEntry.extendeduntil;
+            const extendedUntil = latestEntry.ExtendedUntil;
             const active = isPoolActive(extendedUntil);
 
             statusElement.className = 'pool-status-indicator';
@@ -1306,28 +933,24 @@
                 badgeElement.textContent = active ? 'Active' : 'Inactive';
             }
 
-            // Update countdown
             updateCountdown(poolId, extendedUntil);
         }
 
-        // Function to calculate and display enhanced stats
-        function updatePoolStats(poolId, entries, tokenSymbol) {
+        // Calculate and display enhanced stats
+        function updatePoolStats(poolId, entries) {
             if (entries.length === 0) return;
 
-            // Calculate stats
-            const amounts = entries.map(e => parseFloat(e.Amount || e.amount || 0));
+            const amounts = entries.map(e => parseFloat(e.Amount || 0));
             const total = amounts.reduce((sum, val) => sum + val, 0);
             const average = total / amounts.length;
             const largest = Math.max(...amounts);
             const distributions = entries.length;
 
-            // Calculate days active
-            const dates = entries.map(e => new Date(e.Date || e.date));
+            const dates = entries.map(e => new Date(e.Date));
             const startDate = new Date(Math.min(...dates));
             const today = new Date();
             const daysActive = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
 
-            // Update elements
             const avgElement = document.getElementById(`avg-reward-${poolId}`);
             const largestElement = document.getElementById(`largest-reward-${poolId}`);
             const distributionsElement = document.getElementById(`distributions-${poolId}`);
@@ -1339,7 +962,7 @@
             if (daysActiveElement) daysActiveElement.textContent = daysActive;
         }
 
-        // Function to update global stats
+        // Update global stats
         function updateGlobalStats() {
             let totalPools = 0;
             let totalActivePools = 0;
@@ -1350,55 +973,44 @@
                 const entries = poolHistoryData[poolId];
                 if (entries.length === 0) return;
 
-                totalPools++; // Count this pool
+                totalPools++;
 
-                // Collect unique token symbols
                 entries.forEach(entry => {
-                    const tokenSymbol = entry.TokenSymbol || entry.tokensymbol;
-                    if (tokenSymbol) uniqueTokens.add(tokenSymbol);
+                    if (entry.TokenSymbol) uniqueTokens.add(entry.TokenSymbol);
                 });
 
-                // Check if pool is active
                 const latestEntry = entries.reduce((latest, entry) => {
-                    const currentDate = new Date(entry.ExtendedUntil || entry.extendeduntil);
-                    const latestDate = new Date(latest.ExtendedUntil || latest.extendeduntil);
+                    const currentDate = new Date(entry.ExtendedUntil);
+                    const latestDate = new Date(latest.ExtendedUntil);
                     return currentDate > latestDate ? entry : latest;
                 });
 
-                if (isPoolActive(latestEntry.ExtendedUntil || latestEntry.extendeduntil)) {
+                if (isPoolActive(latestEntry.ExtendedUntil)) {
                     totalActivePools++;
                 }
 
-                // Find earliest date
                 entries.forEach(entry => {
-                    const date = new Date(entry.Date || entry.date);
+                    const date = new Date(entry.Date);
                     if (date < earliestDate) earliestDate = date;
                 });
             });
 
-            // Calculate days running
             const today = new Date();
             const daysRunning = Math.floor((today - earliestDate) / (1000 * 60 * 60 * 24));
 
-            // Update UI
             document.getElementById('total-pools').textContent = totalPools;
             document.getElementById('active-pools').textContent = totalActivePools;
             document.getElementById('total-tokens').textContent = uniqueTokens.size;
             document.getElementById('days-running').textContent = daysRunning > 0 ? daysRunning : 0;
         }
 
-        // Function to populate filter options
+        // Populate filter options
         function populateFilters(poolId, entries) {
-            const filtersContainer = document.getElementById(`filters-${poolId}`);
-            if (!filtersContainer) return;
-
-            const labelSelect = filtersContainer.querySelector('select');
+            const labelSelect = document.querySelector(`#filters-${poolId} select`);
             if (!labelSelect) return;
 
-            // Get unique labels
-            const labels = [...new Set(entries.map(e => e.Label || e.label || 'None'))];
+            const labels = [...new Set(entries.map(e => e.Label || 'None'))];
             
-            // Keep the "All Labels" option and add unique labels
             const currentOptions = labelSelect.querySelectorAll('option');
             currentOptions.forEach((opt, index) => {
                 if (index > 0) opt.remove();
@@ -1412,7 +1024,7 @@
             });
         }
 
-        // Function to filter and display history
+        // Filter and display history
         function filterHistory(poolId) {
             const filtersContainer = document.getElementById(`filters-${poolId}`);
             if (!filtersContainer) return;
@@ -1423,46 +1035,47 @@
 
             let entries = [...(poolHistoryData[poolId] || [])];
 
-            // Filter by label
             if (labelFilter !== 'all') {
-                entries = entries.filter(e => (e.Label || e.label || 'None') === labelFilter);
+                entries = entries.filter(e => (e.Label || 'None') === labelFilter);
             }
 
-            // Sort by date
             entries.sort((a, b) => {
-                const dateA = new Date(a.Date || a.date);
-                const dateB = new Date(b.Date || b.date);
+                const dateA = new Date(a.Date);
+                const dateB = new Date(b.Date);
                 return sortOrder === 'latest' ? dateB - dateA : dateA - dateB;
             });
 
-            // Display filtered entries
             displayHistoryEntries(poolId, entries);
         }
 
-        // Function to display history entries
+        // Display history entries
         function displayHistoryEntries(poolId, entries) {
             const historyElement = document.getElementById(`history-${poolId}`);
             if (!historyElement) return;
 
-            const tokenSymbol = poolHistoryData[poolId]?.[0]?.TokenSymbol || poolHistoryData[poolId]?.[0]?.tokensymbol || 'Tokens';
+            const config = poolConfigs[poolId];
+            const tokenSymbol = config?.RewardToken || 'Tokens';
 
             if (entries.length === 0) {
                 historyElement.innerHTML = '<p style="color: #93c5fd;">No history entries match the selected filters.</p>';
             } else {
                 historyElement.innerHTML = entries.map(entry => {
-                    const date = entry.Date || entry.date || 'N/A';
-                    const amount = formatNumber(parseFloat(entry.Amount || entry.amount || 0));
-                    const extendedUntil = entry.ExtendedUntil || entry.extendeduntil || 'N/A';
-                    const OwnerComment = entry.OwnerComment || entry.OwnerComment || 'None';
-                    const Label = entry.Label || entry.Label || 'None';
+                    const date = entry.Date || 'N/A';
+                    const amount = formatNumber(parseFloat(entry.Amount || 0));
+                    const extendedUntil = entry.ExtendedUntil || 'N/A';
+                    const ownerComment = entry.OwnerComment || 'None';
+                    const label = entry.Label || 'None';
 
                     return `
                         <div class="history-entry">
-                            <div class="history-date"> <div class="funding-percentage"><b>${Label}</b></div> 📅 ${date}</div> 
+                            <div class="history-date">
+                                <div class="funding-percentage"><b>${label}</b></div> 
+                                📅 ${date}
+                            </div> 
                             <div class="history-details">
                                 <strong>Rewards Added:</strong> ${amount} ${tokenSymbol}<br>
-                                <strong>Pool Extended Until:</strong> ${extendedUntil} <br>
-                                <strong>Comment:</strong> ${OwnerComment}
+                                <strong>Pool Extended Until:</strong> ${extendedUntil}<br>
+                                <strong>Comment:</strong> ${ownerComment}
                             </div>
                         </div>
                     `;
@@ -1470,112 +1083,307 @@
             }
         }
 
-        // Function to load data from Google Sheets
-        async function loadPoolData() {
-            // Check if URL is configured
-            if (!GOOGLE_SHEET_CSV_URL) {
-                console.warn('Google Sheets URL not configured. Using fallback data.');
-                useFallbackData();
-                return;
-            }
-
-            try {
-                const response = await fetch(GOOGLE_SHEET_CSV_URL);
-                
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-                
-                const csvText = await response.text();
-                const data = parseCSV(csvText);
-                
-                // Group data by pool
-                const poolData = {};
-                data.forEach(entry => {
-                    const poolId = entry.PoolID || entry.poolid || entry.poolId;
-                    if (!poolData[poolId]) {
-                        poolData[poolId] = [];
-                    }
-                    poolData[poolId].push(entry);
-                });
-                
-                // Update each pool
-                Object.keys(poolData).forEach(poolId => {
-                    updatePoolDisplay(poolId, poolData[poolId]);
-                });
-
-                // Update global stats
-                updateGlobalStats();
-                
-            } catch (error) {
-                console.error('Error loading pool data:', error);
-                showError('Unable to load pool history. Please try again later.');
-                useFallbackData();
-            }
-        }
-
-        // Function to use fallback data when Google Sheets is not configured
-        function useFallbackData() {
-            const fallbackData = {
-                pool1: [
-                    {
-                        Date: '2025-11-14',
-                        Amount: '0',
-                        ExtendedUntil: '2025-12-14',
-                        TokenSymbol: 'ERROR',
-                        OwnerComment: 'An error occured, pls contact me using the button at the bottom of the website',
-                        Label:'None'
-                    }
-                ]
-            };
+        // Generate pool HTML
+        function generatePoolHTML(config) {
+            const poolId = config.PoolID;
             
-            Object.keys(fallbackData).forEach(poolId => {
-                updatePoolDisplay(poolId, fallbackData[poolId]);
-            });
+            return `
+                <div class="pool-wrapper" data-pool-id="${poolId}">
+                    <div class="pool-main-header" onclick="togglePoolMain(this)">
+                        <div class="pool-header-left">
+                            <span>💎 Pool: ${config.StakeToken} ⇒ ${config.RewardToken}</span>
+                            <span class="pool-status-badge badge-active" id="badge-${poolId}">Loading...</span>
+                        </div>
+                        <span class="pool-main-arrow">▼</span>
+                        <div class="pool-status-indicator" id="status-${poolId}" title="Loading status...">
+                            <span class="loading-indicator" style="width: 15px; height: 15px;"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="pool-main-content">
+                        <div class="card">
+                            <h2>📊 Pool Information</h2>
+                            <div class="pool-grid">
+                                <div class="pool-item">
+                                    <div class="pool-label">Token to Stake</div>
+                                    <div class="pool-value">${config.StakeToken}</div>
+                                </div>
+                                <div class="pool-item">
+                                    <div class="pool-label">Token to Earn</div>
+                                    <div class="pool-value">${config.RewardToken}</div>
+                                </div>
+                                <div class="pool-item">
+                                    <div class="pool-label">Total Given Away</div>
+                                    <div class="pool-value" id="total-${poolId}">
+                                        <span class="loading-indicator"></span>
+                                    </div>
+                                </div>
+                                <div class="pool-item">
+                                    <div class="pool-label">Pool Start Date</div>
+                                    <div class="pool-value" id="start-date-${poolId}">Loading...</div>
+                                </div>
+                            </div>
 
-            updateGlobalStats();
+                            <div class="pool-stats-grid">
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="avg-reward-${poolId}">-</div>
+                                    <div class="pool-stat-label">Avg Reward</div>
+                                </div>
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="largest-reward-${poolId}">-</div>
+                                    <div class="pool-stat-label">Largest Reward</div>
+                                </div>
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="distributions-${poolId}">-</div>
+                                    <div class="pool-stat-label">Distributions</div>
+                                </div>
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="days-active-${poolId}">-</div>
+                                    <div class="pool-stat-label">Days Active</div>
+                                </div>
+                            </div>
+
+                            <div class="progress-container">
+                                <div class="progress-header">
+                                    <span>⏰ Time Until Pool Ends</span>
+                                    <span id="end-date-${poolId}">Loading...</span>
+                                </div>
+                                <div class="countdown-timer" id="countdown-${poolId}">
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Days</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Hours</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Minutes</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Seconds</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-section">
+                                <div class="accordion-item">
+                                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span>📊 About the Token You Stake</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="accordion-inner">
+                                            <strong>Token Name:</strong> ${config.StakeToken}<br><br>
+                                            <strong>Description:</strong> ${config.StakeTokenDesc || 'No description available'}<br><br>
+                                            <strong>Contract Address:</strong> ${config.StakeTokenContract || 'N/A'}<br><br>
+                                            <strong>Why Stake This Token:</strong> ${config.StakeTokenWhy || 'Support the project and earn rewards'}
+                                            
+                                            ${config.StakeTokenWebsite || config.StakeTokenDiscord ? `
+                                            <div class="social-links">
+                                                <div class="social-links-title">🔗 Social Links</div>
+                                                <div class="social-buttons">
+                                                    ${config.StakeTokenWebsite ? `
+                                                    <a href="${config.StakeTokenWebsite}" class="btn-small btn-website-small">
+                                                        🌐 Website
+                                                    </a>` : ''}
+                                                    ${config.StakeTokenDiscord ? `
+                                                    <a href="${config.StakeTokenDiscord}" class="btn-small btn-discord-small">
+                                                        💬 Discord
+                                                    </a>` : ''}
+                                                </div>
+                                            </div>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span>🎁 About the Token You Earn</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="accordion-inner">
+                                            <strong>Token Name:</strong> ${config.RewardToken}<br><br>
+                                            <strong>Description:</strong> ${config.RewardTokenDesc || 'No description available'}<br><br>
+                                            <strong>Contract Address:</strong> ${config.RewardTokenContract || 'N/A'}<br><br>
+                                            <strong>Utility:</strong> ${config.RewardTokenUtility || 'Can be traded or used within the ecosystem'}
+                                            
+                                            ${config.RewardTokenWebsite || config.RewardTokenDiscord ? `
+                                            <div class="social-links">
+                                                <div class="social-links-title">🔗 Social Links</div>
+                                                <div class="social-buttons">
+                                                    ${config.RewardTokenWebsite ? `
+                                                    <a href="${config.RewardTokenWebsite}" class="btn-small btn-website-small">
+                                                        🌐 Website
+                                                    </a>` : ''}
+                                                    ${config.RewardTokenDiscord ? `
+                                                    <a href="${config.RewardTokenDiscord}" class="btn-small btn-discord-small">
+                                                        💬 Discord
+                                                    </a>` : ''}
+                                                </div>
+                                            </div>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span>📜 Pool History</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="accordion-inner">
+                                            <div class="history-filters" id="filters-${poolId}">
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Filter by Label:</label>
+                                                    <select class="filter-select" onchange="filterHistory('${poolId}')">
+                                                        <option value="all">All Labels</option>
+                                                    </select>
+                                                </div>
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Sort by Date:</label>
+                                                    <select class="filter-select" onchange="filterHistory('${poolId}')">
+                                                        <option value="latest">Latest First</option>
+                                                        <option value="oldest">Oldest First</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="history-log" id="history-${poolId}">
+                                                <span class="loading-indicator"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
-        // Function to update pool display
+        // Update pool display
         function updatePoolDisplay(poolId, entries) {
-            // Store entries globally for filtering
             poolHistoryData[poolId] = entries;
 
-            // Calculate total
             let total = 0;
             entries.forEach(entry => {
-                const amount = parseFloat(entry.Amount || entry.amount || 0);
+                const amount = parseFloat(entry.Amount || 0);
                 total += amount;
             });
             
-            const tokenSymbol = entries[0]?.TokenSymbol || entries[0]?.tokensymbol || 'Tokens';
+            const config = poolConfigs[poolId];
+            const tokenSymbol = config?.RewardToken || 'Tokens';
             
-            // Update total display
             const totalElement = document.getElementById(`total-${poolId}`);
             if (totalElement) {
                 totalElement.innerHTML = `${formatNumber(total)} ${tokenSymbol}`;
             }
             
-            // Update pool status
+            // Get earliest date as start date
+            const dates = entries.map(e => new Date(e.Date));
+            const startDate = new Date(Math.min(...dates));
+            const startDateElement = document.getElementById(`start-date-${poolId}`);
+            if (startDateElement) {
+                startDateElement.textContent = startDate.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            }
+
             updatePoolStatus(poolId, entries);
-
-            // Update enhanced stats
-            updatePoolStats(poolId, entries, tokenSymbol);
-
-            // Populate filter options
+            updatePoolStats(poolId, entries);
             populateFilters(poolId, entries);
-
-            // Display history with default filters (all labels, latest first)
             filterHistory(poolId);
         }
 
-        // Function to show error message
-        function showError(message) {
-            document.querySelectorAll('.history-log').forEach(log => {
-                if (log.querySelector('.loading-indicator')) {
-                    log.innerHTML = `<div class="error-message">${message}</div>`;
+        // Load pool configurations
+        async function loadPoolConfigs() {
+            try {
+                const response = await fetch(POOL_CONFIG_CSV_URL);
+                if (!response.ok) throw new Error('Failed to fetch pool configurations');
+                
+                const csvText = await response.text();
+                const configs = parseCSV(csvText);
+                
+                configs.forEach(config => {
+                    poolConfigs[config.PoolID] = config;
+                });
+                
+                return configs;
+            } catch (error) {
+                console.error('Error loading pool configurations:', error);
+                return [];
+            }
+        }
+
+        // Load pool history
+        async function loadPoolHistory() {
+            try {
+                const response = await fetch(POOL_HISTORY_CSV_URL);
+                if (!response.ok) throw new Error('Failed to fetch pool history');
+                
+                const csvText = await response.text();
+                const history = parseCSV(csvText);
+                
+                const groupedHistory = {};
+                history.forEach(entry => {
+                    const poolId = entry.PoolID;
+                    if (!groupedHistory[poolId]) {
+                        groupedHistory[poolId] = [];
+                    }
+                    groupedHistory[poolId].push(entry);
+                });
+                
+                return groupedHistory;
+            } catch (error) {
+                console.error('Error loading pool history:', error);
+                return {};
+            }
+        }
+
+        // Initialize the application
+        async function initializeApp() {
+            const configs = await loadPoolConfigs();
+            const history = await loadPoolHistory();
+            
+            if (configs.length === 0) {
+                document.getElementById('pools-container').innerHTML = `
+                    <div class="error-message">
+                        Unable to load pool configurations. Please contact me with the button at the bottom of the website.
+                    </div>
+                `;
+                return;
+            }
+            
+            const poolsContainer = document.getElementById('pools-container');
+            
+            // Remove loading message
+            const loadingElement = document.getElementById('pools-loading');
+            if (loadingElement) {
+                loadingElement.remove();
+            }
+            
+            // Clear container and add pools
+            poolsContainer.innerHTML = '';
+            
+            configs.forEach(config => {
+                const poolHTML = generatePoolHTML(config);
+                poolsContainer.innerHTML += poolHTML;
+            });
+            
+            Object.keys(history).forEach(poolId => {
+                if (poolConfigs[poolId]) {
+                    updatePoolDisplay(poolId, history[poolId]);
                 }
             });
+            
+            updateGlobalStats();
         }
 
         // Toggle functions
@@ -1669,14 +1477,11 @@
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             particles.forEach(particle => {
                 particle.update();
                 particle.draw();
             });
-
             connectParticles();
-
             requestAnimationFrame(animate);
         }
 
@@ -1687,15 +1492,9 @@
             canvas.height = window.innerHeight;
         });
 
-        // Add stagger animation to cards
-        const cards = document.querySelectorAll('.card');
-        cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.2}s`;
-        });
-
-        // Load pool data on page load
+        // Initialize on page load
         window.addEventListener('DOMContentLoaded', () => {
-            loadPoolData();
+            initializeApp();
         });
     </script>
 </body>
