@@ -945,6 +945,177 @@
             </div>
         </div>
 
+                <!-- POOL 2: BXW => AGAR -->
+                <div class="pool-wrapper" data-pool-id="pool2">
+                    <div class="pool-main-header" onclick="togglePoolMain(this)">
+                        <div class="pool-header-left">
+                            <span>💎 Pool: TBA ⇒ TBA</span>
+                            <span class="pool-status-badge badge-active" id="badge-pool1">Loading...</span>
+                        </div>
+                        <span class="pool-main-arrow">▼</span>
+                        <div class="pool-status-indicator" id="status-pool2" title="Loading status...">
+                            <span class="loading-indicator" style="width: 15px; height: 15px;"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="pool-main-content">
+                        <div class="card">
+                            <h2>📊 Pool Information</h2>
+                            <div class="pool-grid">
+                                <div class="pool-item">
+                                    <div class="pool-label">Token to Stake</div>
+                                    <div class="pool-value">TBA</div>
+                                </div>
+                                <div class="pool-item">
+                                    <div class="pool-label">Token to Earn</div>
+                                    <div class="pool-value">TBA</div>
+                                </div>
+                                <div class="pool-item">
+                                    <div class="pool-label">Total Given Away</div>
+                                    <div class="pool-value" id="total-pool2">
+                                        <span class="loading-indicator"></span>
+                                    </div>
+                                </div>
+                                <div class="pool-item">
+                                    <div class="pool-label">Pool Start Date</div>
+                                    <div class="pool-value">TBA</div>
+                                </div>
+                            </div>
+        
+                            <!-- Enhanced Pool Stats -->
+                            <div class="pool-stats-grid" id="stats-pool2">
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="avg-reward-pool2">-</div>
+                                    <div class="pool-stat-label">Avg Reward</div>
+                                </div>
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="largest-reward-pool2">-</div>
+                                    <div class="pool-stat-label">Largest Reward</div>
+                                </div>
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="distributions-pool2">-</div>
+                                    <div class="pool-stat-label">Distributions</div>
+                                </div>
+                                <div class="pool-stat-item">
+                                    <div class="pool-stat-value" id="days-active-pool2">-</div>
+                                    <div class="pool-stat-label">Days Active</div>
+                                </div>
+                            </div>
+        
+                            <!-- Countdown Timer -->
+                            <div class="progress-container">
+                                <div class="progress-header">
+                                    <span>⏰ Time Until Pool Ends</span>
+                                    <span id="end-date-pool1">Loading...</span>
+                                </div>
+                                <div class="countdown-timer" id="countdown-pool2">
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Days</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Hours</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Minutes</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">-</div>
+                                        <div class="countdown-label">Seconds</div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="accordion-section">
+                                <div class="accordion-item">
+                                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span>📊 About the Token You Stake</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="accordion-inner">
+                                            <strong>Token Name:</strong> TBA<br><br>
+                                            <strong>Description:</strong>Currently no 2nd pool has been created, there might be future plans for more pools.<br><br>
+                                            <strong>Contract Address:</strong> / <br><br>
+                                            <strong>Why Stake This Token:</strong>
+                                            
+                                            <div class="social-links">
+                                                <div class="social-links-title">🔗 Social Links</div>
+                                                <div class="social-buttons">
+                                                    <a href="wax.io" class="btn-small btn-website-small">
+                                                        🌐 Website
+                                                    </a>
+                                                    <a href="wax.io" class="btn-small btn-discord-small">
+                                                        💬 Discord
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="accordion-item">
+                                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span>🎁 About the Token You Earn</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="accordion-inner">
+                                            <strong>Token Name:</strong> TBA<br><br>
+                                            <strong>Description:</strong> Currently no 2nd pool has been created, there might be future plans for more pools.<br><br>
+                                            <strong>Contract Address:</strong>/<br><br>
+                                            <strong>Utility:</strong> 
+                                            
+                                            <div class="social-links">
+                                                <div class="social-links-title">🔗 Social Links</div>
+                                                <div class="social-buttons">
+                                                    <a href="wax.io" class="btn-small btn-website-small">
+                                                        🌐 Website
+                                                    </a>
+                                                    <a href="wax.io" class="btn-small btn-discord-small">
+                                                        💬 Discord
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="accordion-item">
+                                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                                        <span>📜 Pool History</span>
+                                        <span class="accordion-arrow">▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="accordion-inner">
+                                            <div class="history-filters" id="filters-pool2">
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Filter by Label:</label>
+                                                    <select class="filter-select" onchange="filterHistory('pool2')">
+                                                        <option value="all">All Labels</option>
+                                                    </select>
+                                                </div>
+                                                <div class="filter-group">
+                                                    <label class="filter-label">Sort by Date:</label>
+                                                    <select class="filter-select" onchange="filterHistory('pool2')">
+                                                        <option value="latest">Latest First</option>
+                                                        <option value="oldest">Oldest First</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="history-log" id="history-pool2">
+                                                <span class="loading-indicator"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
         <div class="card">
             <h2>💰 How I Fund The Pools</h2>
             <div class="funding-section">
